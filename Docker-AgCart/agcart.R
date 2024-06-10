@@ -47,8 +47,8 @@ map = optimizeMap(map = map, number_of_dimensions=2, number_of_optimizations=100
 save.coords(map, paste0(p[4],"/",p[3],"_Cart_racmacs_coordinates.csv"))
 
 #Read coord data to calculate within-group distances!
-df1 = read.csv(paste0(p[4],"/",p[3],"_Cart_racmacs_coordinates.csv"))
-df2 = df1[str_detect(df1$type, "antigen"),] #ANTIGEN DISTANCES
+frame68 = read.csv(paste0(p[4],"/",p[3],"_Cart_racmacs_coordinates.csv"))
+df2 = frame68[str_detect(frame68$type, "antigen"),] #ANTIGEN DISTANCES
 df2 = subset(df2, select = -c(1))
 rownames(df2) = df2[,1]
 df2 = subset(df2, select = -c(1))
@@ -56,7 +56,7 @@ AgDistances = reshape2::melt(as.matrix(dist(df2))) #Distance Matrix command
 colnames(AgDistances) = c("Virus 1","Virus 2","Distance")
 write.csv(AgDistances,paste0(p[4],"/",p[3],"_Cart_Distance_within_ag.csv"))
 
-df3 = df1[str_detect(df1$type, "sera"),] #SERA DISTANCES
+df3 = frame68[str_detect(frame68$type, "sera"),] #SERA DISTANCES
 rownames(df3) = df3$name
 df3 = df3[,c(-1,-2)]
 SeraDistances = reshape2::melt(as.matrix(dist(df3)))
@@ -66,22 +66,21 @@ write.csv(SeraDistances,paste0(p[4],"/",p[3],"_Cart_Distance_within_sera.csv"))
 alpha = str_split_fixed(p[6], ",", 2) #Alphas
 
 #Plots'n'stuff
-df1$colors = c(paletteer_d("ggthemes::calc")[1:nantigen],rep("#0d0101",nsera)) #Supports up to 12 Distinct Colors for Antigens, approximately black color applied to Sera.
-size = str_split_fixed(p[5],",",2) #Sizes
-df1$size= c(rep(as.numeric(size[1]),nantigen),rep(as.numeric(size[2]),nsera))
-df1$type = c(rep("Antigen",nantigen),rep("Sera",nsera))
-df1$name = c(df1$name[1:nantigen],rep("Sera",nsera))
-df1$alpha = c(rep(as.numeric(alpha[1]),nantigen),rep(as.numeric(alpha[2]),nsera))
-z = str_split_fixed(p[2], ",", 4) #XY_lims
-if (toupper(p[7]) == "TRUE"){
-    df1 = rbind(df1[grepl("Sera",df1$type),],df1[grepl("Antigen",df1$type),])
-}
+frame68$color = c(paletteer_d("ggthemes::calc")[1:nantigen],rep("#0d0101",nsera)) #Supports up to 12 Distinct Colors for Antigens, approximately black color applied to Sera.
+frame68$size= c(rep(as.numeric(1.5),nantigen),rep(as.numeric(4.5),nsera))
+frame68$type = c(rep("Antigen",nantigen),rep("Sera",nsera))
+frame68$name = c(rep("Sera",nantigen),frame68$name[112:122])
+frame68$alpha = c(rep(as.numeric(.4),nantigen),rep(as.numeric(.8),nsera))
+z = "-10,10,-10,10" #XY_lims
+#if (toupper(p[7]) == "TRUE"){
+#    frame68 = rbind(frame68[grepl("Sera",frame68$type),],frame68[grepl("Antigen",frame68$type),])
+#}
 
 pdf(paste0(p[4],"/",p[3],"_",z[2],"x",z[4],".pdf"))
-mp =ggplot(df1, aes(x=X,y=X.1)) +
-    geom_point(alpha=df1$alpha,size=df1$size,
+mp =ggplot(frame68, aes(x=X,y=X.1)) +
+    geom_point(alpha=frame68$alpha,size=frame68$size,
                aes(shape = type, color = name)) +
-    scale_color_manual("Name", values=c(df1[grepl("Antigen",df1$type),5],df1$color[1]),breaks=df1[grepl("Antigen",df1$type),2])+
+    scale_color_manual("Name", values=c(frame68[grepl("Antigen",frame68$type),5],frame68$color[1]),breaks=frame68[grepl("Antigen",frame68$type),2])+
     ylab("Y") +
     coord_fixed(ylim=c(as.numeric(z[1]),as.numeric(z[2])),xlim=c(as.numeric(z[3]),as.numeric(z[4])))+
     scale_x_continuous(breaks=scales::pretty_breaks(n=(as.numeric(z[2])*2)+1))+
