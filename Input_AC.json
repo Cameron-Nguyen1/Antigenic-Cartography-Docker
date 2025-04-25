@@ -1,0 +1,12 @@
+{
+    "agQC.titertables": ["204_v1.csv", "204_v5.csv", "204_v7.csv"],
+    "agQC.prefixes": ["TEST1","TEST2","TEST3"],
+    "agQC.cpu": "1",
+    "agQC.mem": "2G",
+    "agQC.repsxdim": "100",
+    "agQC.xy_lim": "-10,10,-10,10",
+    "agQC.psizes": "5,2",
+    "agQC.opacity": ".8,1",
+    "agQC.agoverprint": "FALSE",
+    "agQC.agsort": "TRUE"
+}
