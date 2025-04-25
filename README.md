@@ -42,6 +42,7 @@ Where:</br>
 `agsort` : Controls whether Antigens will be sorted by name. TRUE/FALSE. </br> 
 
 ## IV. EXAMPLE USAGE:
-docker run \
-    -v /example/path/data:/usr/local/work/ \
-    -it agcart --Input='TEST_DATA.csv' --XY_Lim="-10,10,-10,10" --Prefix="mystudy" --Out="MyDir" --Point_Sizes="5,2" --Transparency=".8,1" --Antigen_Overprint="FALSE"
+```
+miniwdl run AntigenicCartography.wdl --input Input_AC.json
+```
+
