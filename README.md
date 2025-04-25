@@ -29,12 +29,17 @@ Use a WDL engine, like miniWDL, to run the workflow like so:</br>
 }
 ```
 Where:</br>
-`titertables` will be a list of inputs. </br>
-`prefixes` are unique identifiers respective to titer tables. </br>
-`cpu` number of CPUs to allocate to any individual task. </br>
-`mem` memory in GB to allocate to any individual task. </br>
-`repsxdim` number of test replicates per dimension in QC task, default should be 1000. </br>
-`xy_lim` XY limits for the cartography map: -X,X,-Y,Y format
+</br>
+`titertables` : will be a list of inputs. </br>
+`prefixes` : are unique identifiers respective to titer tables. </br>
+`cpu` : number of CPUs to allocate to any individual task. </br>
+`mem` : memory in GB to allocate to any individual task. </br>
+`repsxdim` : number of test replicates per dimension in QC task, default should be 1000. </br>
+`xy_lim` : XY limits for the cartography map in the following format: -X,X,-Y,Y </br>
+`psizes` : Antigenic and Sera point sizes in the format: AntigenSize,SeraSize </br>
+`opacity` : Controls opacity of Antigen and Sera poins in the format: AntigenOpacity,SeraOpacity </br>
+`agoverprint` : Controls Antigen overprint, TRUE if Antigen should print over Sera, FALSE if not.</br>
+`agsort` : Controls whether Antigens will be sorted by name. TRUE/FALSE. </br> 
 
 ## IV. EXAMPLE USAGE:
 docker run \
