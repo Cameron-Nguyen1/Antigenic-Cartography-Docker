@@ -1,7 +1,7 @@
 # Antigenic-Cartography-WDL
 :star: Parallel Antgenic Cartography with QC checks orchestrated by WDL :star:
 ## I. INTRODUCTION
-This pipeline uses one R Version 4.3.1 docker image (MY IMAGE) to run an antigenic cartography analysis.</br>
+This pipeline uses one R Version 4.3.1 [docker image](https://github.com/Cameron-Nguyen1/Docker_Images/tree/main/WDL_R_AntigenicCartography) to run an antigenic cartography analysis.</br>
 </br>
 An input titer table is specified, alongside cartography parameters, to derive a cartography figure,</br>
 within group distances, and associated QC checks.</br>
